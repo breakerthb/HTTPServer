@@ -15,12 +15,13 @@ var server = http.createServer(function (request, response) {
     var ext = path.extname(realPath);
     ext = ext ? ext.slice(1) : 'unknown';
     
+    // The realPath must have a page file
     fs.exists(realPath, function (exists) {
 	if (!exists) {
-            response.writeHead(404, {
+                response.writeHead(404, {
                 'Content-Type': 'text/plain'
             });
-
+            
             response.write("This request URL " + pathname + " was not found on this server.");
             response.end();
         } else {
